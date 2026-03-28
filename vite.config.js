@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
+  base: 'docs',
   plugins: [
     vue(),
     tailwindcss(),
@@ -14,6 +15,7 @@ export default defineConfig({
   },
   build: {
     outDir: 'docs',
+    assetsDir: 'assets',
     sourcemap: false,
     emptyOutDir: true,
   }
