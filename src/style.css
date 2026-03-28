@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+/* 90s Arcade Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+@layer base {
+  * {
+    @apply border-green-500;
+    image-rendering: crisp-edges;
+    image-rendering: pixelated;
+  }
+
+  body {
+    @apply bg-black text-green-500;
+    font-family: 'VT323', monospace;
+    background: radial-gradient(circle at 50% 50%, #0a0f0a 0%, #000000 100%);
+    position: relative;
+  }
+
+  /* CRT Scanlines - Matching Loader */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+        rgba(0, 255, 0, 0.03) 0px,
+        rgba(0, 255, 0, 0.03) 2px,
+        transparent 2px,
+        transparent 4px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Flicker Effect - Matching Loader */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 255, 0, 0.02);
+    pointer-events: none;
+    animation: flicker 0.15s infinite;
+    z-index: 1;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-black;
+    border: 1px solid #22c55e;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-green-500;
+    border: 1px solid #22c55e;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-green-400;
+  }
+}
+
+@layer components {
+
+  /* Pixel Card - Matching Loader Container */
+  .pixel-card {
+    @apply bg-black border-2 border-green-500;
+    background: linear-gradient(135deg, rgba(0, 20, 0, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
+    box-shadow: 4px 4px 0px 0px #166534;
+    position: relative;
+  }
+
+  .pixel-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #22c55e, #166534, #22c55e);
+    z-index: -1;
+    opacity: 0.3;
+  }
+
+  .pixel-card-header {
+    @apply p-4 border-b-2 border-green-500 bg-black/50;
+    position: relative;
+  }
+
+  .pixel-card-title {
+    @apply text-sm font-bold uppercase tracking-wider;
+    font-family: 'Press Start 2P', monospace;
+    color: #22c55e;
+    text-shadow: 2px 2px 0px #166534;
+    letter-spacing: 1px;
+  }
+
+  /* Pixel Progress Bar - Matching Loader */
+  .pixel-progress {
+    @apply bg-black;
+    height: 12px;
+    border: 1px solid #22c55e;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pixel-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #22c55e, #4ade80, #22c55e);
+    background-size: 200% 100%;
+    animation: shimmer 1s linear infinite;
+    transition: width 0.1s steps(10);
+  }
+
+  /* Pixel Button - Matching Loader Style */
+  .pixel-button {
+    @apply px-4 py-2 text-xs font-bold uppercase;
+    font-family: 'Press Start 2P', monospace;
+    background: #1a2a1a;
+    color: #22c55e;
+    border: 1px solid #22c55e;
+    box-shadow: 2px 2px 0px 0px #166534;
+    transition: all 0.05s linear;
+    cursor: pointer;
+  }
+
+  .pixel-button:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0px 0px #166534;
+  }
+
+  /* Pixel Badge */
+  .pixel-badge {
+    @apply px-2 py-1 text-xs font-bold border;
+    font-family: 'Press Start 2P', monospace;
+  }
+
+  /* Pixel Grid Background - Matching Loader Grid */
+  .pixel-grid-bg {
+    background-image:
+      linear-gradient(rgba(34, 197, 94, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34, 197, 94, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  /* Scanning Line - Matching Loader */
+  .scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #22c55e, transparent);
+    animation: scan 3s linear infinite;
+    pointer-events: none;
+    z-index: 50;
+  }
+}
+
+@layer utilities {
+
+  /* Pixel Text Effects */
+  .pixel-text {
+    font-family: 'Press Start 2P', monospace;
+    text-shadow: 2px 2px 0px #166534;
+  }
+
+  .pixel-text-glow {
+    text-shadow: 0 0 5px #22c55e, 0 0 10px #22c55e;
+    animation: textPulse 1s ease-in-out infinite;
+  }
+
+  /* Terminal Cursor */
+  .terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background-color: #22c55e;
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Blinking Animation - Matching Loader */
+  .blink-pixel {
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Bounce Animation - Matching Loader */
+  .bounce-pixel {
+    animation: bounce-pixel 0.6s steps(2) infinite;
+  }
+}
+
+/* Animations - Matching Loader */
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes bounce-pixel {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes textPulse {
+
+  0%,
+  100% {
+    text-shadow: 0 0 5px #22c55e, 0 0 10px #22c55e;
+  }
+
+  50% {
+    text-shadow: 0 0 15px #22c55e, 0 0 20px #22c55e;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes pixel-blink {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
